@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brazil Expo | Grade 8 Boys</title>
+<style>
+:root{--green:#08783e;--deep:#064b2b;--yellow:#ffd447;--blue:#1765a8;--ink:#173329;--paper:#fffdf5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--paper);color:var(--ink)}
+.sidebar{position:fixed;inset:0 auto 0 0;width:258px;background:linear-gradient(180deg,#075c34,#043d2a);color:white;padding:24px 18px;z-index:5;overflow-y:auto;transition:transform .25s}
+.brand{font-weight:900;font-size:21px;letter-spacing:.5px;margin:5px 10px 4px}
+.brand span{color:var(--yellow)}
+.subbrand{font-size:12px;color:#d9f1df;margin:0 10px 28px}
+.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:1.8px;color:#b8ddc5;margin:20px 10px 9px}
+.nav a{display:flex;align-items:center;gap:11px;color:#f5fff7;text-decoration:none;padding:12px 13px;border-radius:11px;margin:4px 0;font-size:14px;transition:.2s}
+.nav a:hover,.nav a.active{background:#ffffff20;color:var(--yellow)}
+.nav .num{width:24px;height:24px;border-radius:8px;background:#ffffff1b;display:grid;place-items:center;font-size:11px}
+.sidebar-foot{font-size:11px;color:#c5e5cf;margin:30px 10px 5px;line-height:1.5}
+main{margin-left:258px}
+.topbar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;border-bottom:1px solid #e9e5d7;background:#fffdf5eF;position:sticky;top:0;z-index:3;backdrop-filter:blur(8px)}
+.topbar strong{font-size:13px;letter-spacing:1px;color:var(--deep)}
+.menu-btn{display:none;border:0;background:var(--deep);color:white;border-radius:9px;padding:9px 12px;font-size:18px}
+.content{max-width:1120px;margin:auto;padding:0 5vw}
+section{scroll-margin-top:85px;padding:74px 0;min-height:55vh}
+.hero{min-height:calc(100vh - 64px);display:flex;align-items:center;padding-top:55px;padding-bottom:55px}
+.hero-card{width:100%;border-radius:28px;padding:clamp(30px,6vw,72px);background:linear-gradient(125deg,#075c34 0%,#08783e 52%,#0d6c87 100%);color:white;position:relative;overflow:hidden;box-shadow:0 18px 45px #0b573022}
+.hero-card:before{content:"";position:absolute;width:360px;height:360px;border:48px solid #ffffff12;border-radius:50%;right:-80px;top:-120px}
+.hero-card:after{content:"";position:absolute;width:220px;height:220px;background:#ffd44720;border-radius:50%;right:120px;bottom:-145px}
+.eyebrow{color:var(--yellow);font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:12px}
+h1{font-size:clamp(44px,7vw,82px);line-height:.98;margin:20px 0 16px;letter-spacing:-2px}
+.hero p{font-size:18px;line-height:1.65;max-width:600px;color:#e9f7ed}
+.hero-meta{display:inline-block;margin-top:24px;background:var(--yellow);color:#16452b;padding:11px 17px;border-radius:30px;font-size:13px;font-weight:800}
+.section-kicker{color:var(--green);font-weight:800;text-transform:uppercase;letter-spacing:1.8px;font-size:11px}
+h2{font-size:clamp(30px,4vw,46px);margin:10px 0 14px;color:var(--deep);letter-spacing:-1px}
+.lead{font-size:17px;line-height:1.7;max-width:760px;color:#52655a}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:28px}
+.card{background:white;border:1px solid #ece8da;border-radius:18px;padding:23px;box-shadow:0 8px 22px #17332908}
+.card .emoji{font-size:28px}
+.card h3{margin:12px 0 8px;color:var(--deep);font-size:19px}
+.card p{margin:0;color:#596a60;line-height:1.65;font-size:14px}
+.fact-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+.fact{background:#f0f6e9;border-radius:15px;padding:18px 14px}
+.fact b{display:block;color:var(--green);font-size:24px}
+.fact span{font-size:12px;color:#596a60;line-height:1.4}
+.callout{margin-top:22px;padding:19px 22px;border-left:4px solid var(--yellow);background:#fff7d8;border-radius:0 14px 14px 0;line-height:1.65;color:#5d5129}
+.rating-panel{background:white;border:1px solid #ece8da;border-radius:22px;padding:clamp(22px,4vw,38px);max-width:700px;margin-top:28px;box-shadow:0 12px 30px #1733290c}
+.stars{display:flex;gap:8px;margin:14px 0 24px;flex-wrap:wrap}
+.star{border:0;background:#f1f0e9;color:#b9b7ac;font-size:30px;width:48px;height:48px;border-radius:12px;cursor:pointer;transition:.15s}
+.star.selected,.star:hover{background:#fff2bd;color:#e2a900}
+.rating-label{font-weight:700;color:var(--deep);font-size:14px}
+input[type=range]{width:100%;accent-color:var(--green);margin:18px 0 5px}
+.scale{display:flex;justify-content:space-between;color:#718077;font-size:12px}
+.score{font-size:32px;font-weight:900;color:var(--green);margin-top:8px}
+.submit{border:0;background:var(--green);color:white;font-weight:800;padding:13px 20px;border-radius:12px;cursor:pointer;margin-top:20px}
+.submit:hover{background:var(--deep)}
+.thanks{background:linear-gradient(130deg,#075c34,#0c7184);border-radius:25px;padding:clamp(30px,6vw,65px);color:white;text-align:center;margin-top:25px}
+.thanks h2{color:white;font-size:clamp(38px,6vw,64px)}
+.thanks p{line-height:1.7;color:#e5f5eb;max-width:600px;margin:0 auto}
+footer{padding:24px 5vw;color:#718077;font-size:12px;border-top:1px solid #e9e5d7}
+.toast{margin-top:14px;color:var(--green);font-weight:700;font-size:14px;min-height:20px}
+@media(max-width:800px){
+.sidebar{transform:translateX(-100%);width:270px;box-shadow:12px 0 30px #0002}
+.sidebar.open{transform:translateX(0)}
+main{margin-left:0}.menu-btn{display:block}.topbar{padding:0 20px}.content{padding:0 22px}
+.grid{grid-template-columns:1fr}.fact-strip{grid-template-columns:repeat(2,1fr)}
+section{padding:55px 0}.hero{min-height:calc(100vh - 64px)}
+}
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <div class="brand">BRAZIL <span>EXPO</span></div>
+  <div class="subbrand">GRADE 8 BOYS · EXPLORE BRAZIL</div>
+  <div class="nav-label">Explore the website</div>
+  <nav class="nav">
+    <a href="#welcome" class="active"><span class="num">01</span> Welcome</a>
+    <a href="#overview"><span class="num">02</span> Brazil at a glance</a>
+    <a href="#landforms"><span class="num">03</span> Landforms & regions</a>
+    <a href="#rivers"><span class="num">04</span> Rivers & waterways</a>
+    <a href="#climate"><span class="num">05</span> Climate & biomes</a>
+    <a href="#places"><span class="num">06</span> Important places</a>
+    <a href="#rating"><span class="num">07</span> Rate your experience</a>
+    <a href="#thanks"><span class="num">08</span> Thank you</a>
+  </nav>
+  <div class="sidebar-foot">Discover the landscapes, natural wonders and geography of Brazil.</div>
+</aside>
+<main>
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+    <strong>DISCOVER · LEARN · EXPLORE</strong>
+    <span style="font-size:12px;color:#6d7c70">🇧🇷 Brazil</span>
+  </header>
+  <div class="content">
+    <section class="hero" id="welcome">
+      <div class="hero-card">
+        <div class="eyebrow">Grade 8 Boys present</div>
+        <h1>Welcome to<br>Brazil Expo!</h1>
+        <p>Get ready to explore the geography of Brazil — from the mighty Amazon River and the world's largest tropical rainforest to highlands, wetlands and spectacular coastlines.</p>
+        <div class="hero-meta">A journey through the land of contrasts 🇧🇷</div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="section-kicker">01 · Introduction</div>
+      <h2>Brazil at a glance</h2>
+      <p class="lead">Brazil is the largest country in South America and the fifth-largest country in the world by area. It is known for its enormous natural landscapes, rich biodiversity and long Atlantic coastline.</p>
+      <div class="fact-strip">
+        <div class="fact"><b>South America</b><span>Continent where Brazil is located</span></div>
+        <div class="fact"><b>Brasília</b><span>Capital city of Brazil</span></div>
+        <div class="fact"><b>Atlantic</b><span>Ocean along its eastern coast</span></div>
+        <div class="fact"><b>Portuguese</b><span>Official language</span></div>
+      </div>
+      <div class="callout"><strong>Did you know?</strong> Brazil shares borders with every South American country except Chile and Ecuador.</div>
+    </section>
+
+    <section id="landforms">
+      <div class="section-kicker">02 · Physical geography</div>
+      <h2>Landforms & regions</h2>
+      <p class="lead">Brazil has a varied landscape made up of plateaus, plains, mountains, valleys and low-lying wetlands.</p>
+      <div class="grid">
+        <article class="card"><div class="emoji">🌳</div><h3>Amazon Basin</h3><p>A vast lowland area in northern Brazil. It contains much of the Amazon Rainforest and is crossed by the Amazon River and its tributaries.</p></article>
+        <article class="card"><div class="emoji">⛰️</div><h3>Brazilian Highlands</h3><p>Extensive elevated areas covering much of central, eastern and southern Brazil. They include plateaus, hills and mountain ranges.</p></article>
+        <article class="card"><div class="emoji">🌾</div><h3>Pantanal</h3><p>A huge tropical wetland in western Brazil. Seasonal flooding creates habitats for many birds, fish, reptiles and mammals.</p></article>
+        <article class="card"><div class="emoji">🏖️</div><h3>Coastal plains</h3><p>Low-lying areas stretch along parts of Brazil's Atlantic coast, with sandy beaches, lagoons, bays and important cities.</p></article>
+      </div>
+    </section>
+
+    <section id="rivers">
+      <div class="section-kicker">03 · Water geography</div>
+      <h2>Rivers & waterways</h2>
+      <p class="lead">Brazil has one of the world's largest networks of rivers. These waterways support wildlife, transport, farming, fishing and hydroelectric power.</p>
+      <div class="grid">
+        <article class="card"><div class="emoji">💧</div><h3>Amazon River</h3><p>One of the world's largest rivers by water flow. It travels across northern South America and empties into the Atlantic Ocean.</p></article>
+        <article class="card"><div class="emoji">🌊</div><h3>Paraná River</h3><p>A major river in southern South America. It forms part of Brazil's river network and is important for hydroelectricity and transport.</p></article>
+        <article class="card"><div class="emoji">🐟</div><h3>São Francisco River</h3><p>An important river that flows through eastern Brazil and provides water for communities, agriculture and ecosystems.</p></article>
+        <article class="card"><div class="emoji">🌿</div><h3>River tributaries</h3><p>Smaller rivers and streams join larger rivers, creating connected drainage systems across Brazil's enormous territory.</p></article>
+      </div>
+      <div class="callout"><strong>Geography fact:</strong> The Amazon River system carries an extraordinary volume of freshwater into the Atlantic Ocean.</div>
+    </section>
+
+    <section id="climate">
+      <div class="section-kicker">04 · Weather & ecosystems</div>
+      <h2>Climate & biomes</h2>
+      <p class="lead">Because Brazil is so large, it has several climate types and natural environments. Rainfall, temperature and vegetation vary from region to region.</p>
+      <div class="grid">
+        <article class="card"><div class="emoji">🌧️</div><h3>Equatorial climate</h3><p>Found mainly in the Amazon region. It is hot and humid, with heavy rainfall through much of the year.</p></article>
+        <article class="card"><div class="emoji">☀️</div><h3>Tropical climate</h3><p>Common across central Brazil, often with a rainy season and a drier season.</p></article>
+        <article class="card"><div class="emoji">🌵</div><h3>Caatinga</h3><p>A dry region in the northeast, with drought-resistant plants adapted to irregular rainfall.</p></article>
+        <article class="card"><div class="emoji">🌲</div><h3>Atlantic Forest</h3><p>A biodiverse forest that once covered much of the eastern coast. Today, only parts of its original area remain.</p></article>
+        <article class="card"><div class="emoji">🦜</div><h3>Cerrado</h3><p>A tropical savanna with grasslands, shrubs and scattered trees. It has many unique plant and animal species.</p></article>
+        <article class="card"><div class="emoji">🐆</div><h3>Pantanal wetlands</h3><p>A seasonal wetland ecosystem famous for its wildlife and wide floodplains.</p></article>
+      </div>
+    </section>
+
+    <section id="places">
+      <div class="section-kicker">05 · Places to know</div>
+      <h2>Important geographical places</h2>
+      <p class="lead">These places show the variety of Brazil's physical and human geography.</p>
+      <div class="grid">
+        <article class="card"><div class="emoji">🌿</div><h3>Amazon Rainforest</h3><p>The world's largest tropical rainforest, mostly located in the Amazon Basin. It plays an important role in global biodiversity and the water cycle.</p></article>
+        <article class="card"><div class="emoji">💦</div><h3>Iguaçu Falls</h3><p>A spectacular system of waterfalls on the border between Brazil and Argentina, surrounded by subtropical forest.</p></article>
+        <article class="card"><div class="emoji">🏙️</div><h3>Rio de Janeiro</h3><p>A coastal city known for its bay, beaches and dramatic granite mountains, including Sugarloaf Mountain.</p></article>
+        <article class="card"><div class="emoji">🌆</div><h3>Brasília</h3><p>Brazil's planned capital, located inland on the Central Plateau rather than on the Atlantic coast.</p></article>
+      </div>
+    </section>
+
+    <section id="rating">
+      <div class="section-kicker">06 · Your feedback</div>
+      <h2>Rate your experience</h2>
+      <p class="lead">We hope you enjoyed discovering Brazil. Please rate your experience using the stars and the 1–10 scale below.</p>
+      <div class="rating-panel">
+        <div class="rating-label">How many stars would you give our expo?</div>
+        <div class="stars" role="group" aria-label="Star rating">
+          <button class="star" data-star="1" aria-label="1 star">★</button><button class="star" data-star="2" aria-label="2 stars">★</button><button class="star" data-star="3" aria-label="3 stars">★</button><button class="star" data-star="4" aria-label="4 stars">★</button><button class="star" data-star="5" aria-label="5 stars">★</button>
+        </div>
+        <div class="rating-label">How good was your overall experience? (1–10)</div>
+        <div class="score"><span id="score">8</span><span style="font-size:15px;color:#728176"> / 10</span></div>
+        <input type="range" id="scale" min="1" max="10" value="8" aria-label="Experience rating from 1 to 10">
+        <div class="scale"><span>1 · Not great</span><span>10 · Excellent</span></div>
+        <button class="submit" id="submitRating">Submit rating</button>
+        <div class="toast" id="toast" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="thanks">
+      <div class="section-kicker">07 · End of our journey</div>
+      <div class="thanks">
+        <div style="font-size:42px">🇧🇷 🌎</div>
+        <h2>Thank You!</h2>
+        <p>Thank you for visiting our Brazil Expo. We hope you enjoyed exploring Brazil's amazing geography, landscapes, rivers, climate and natural wonders.</p>
+        <p style="margin-top:18px;font-weight:800;color:#ffdf62">Presented by Grade 8 Boys</p>
+      </div>
+    </section>
+  </div>
+  <footer>Brazil Expo · Grade 8 Boys · An educational geography showcase</footer>
+</main>
+<script>
+const sidebar=document.getElementById('sidebar');
+document.getElementById('menuBtn').addEventListener('click',()=>sidebar.classList.toggle('open'));
+document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>{
+  document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));
+  a.classList.add('active'); sidebar.classList.remove('open');
+}));
+let stars=0;
+document.querySelectorAll('.star').forEach(btn=>btn.addEventListener('click',()=>{
+  stars=Number(btn.dataset.star);
+  document.querySelectorAll('.star').forEach(s=>s.classList.toggle('selected',Number(s.dataset.star)<=stars));
+}));
+const scale=document.getElementById('scale'),score=document.getElementById('score');
+scale.addEventListener('input',()=>score.textContent=scale.value);
+document.getElementById('submitRating').addEventListener('click',()=>{
+  const starText=stars?`${stars} out of 5 stars`:'no star rating selected';
+  document.getElementById('toast').textContent=`Thank you! Your rating: ${starText} and ${scale.value}/10.`;
+});
+const sections=[...document.querySelectorAll('main section')];
+const links=[...document.querySelectorAll('.nav a')];
+window.addEventListener('scroll',()=>{
+  let current='welcome';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-150)current=s.id;});
+  links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));
+});
+</script>
+</body>
+</html>
